@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Form from '../../Form/Form';
 import LabelTag from '../../LabelTag/LabelTag';
 import InputTag from '../../InputTag/InputTag';
+import Button from '../../Button/Button';
+
 
 function TravelRegister (){
     const styleTitle = {
@@ -9,12 +11,12 @@ function TravelRegister (){
         marginTop: "50px",
     }
     const styleSection = {
-        margin: "50px 0px 100px 0px",
+        margin: "50px 0px",
         display: "flex",
         justifyContent: "center",
     }
     const styleForm = {
-        marginTop: "40px",
+        marginTop: "20px",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gridTemplateRows: "80px 80px 80px 80px 80px 80px 80px 80px 120px"
@@ -24,7 +26,7 @@ function TravelRegister (){
         justifyContent: "flex-end",
         alignItems: "center",
     }
-    const styleInput = {
+    const styleFlexCenter = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -54,8 +56,13 @@ function TravelRegister (){
         border: 'none',
         fontSize: '22px',
         }
+    const styleConteiner = {
+        display: "grid",
+        gridTemplateColumns: "1fr",
+        gridTemplateRows: "40px"
+    }
 
-        const [user,setUser] = useState({
+        const [travel,setTravel] = useState({
             nombreTrabajadores: '',
             numeroTrabajadores: '',
             fecha: '',
@@ -67,33 +74,33 @@ function TravelRegister (){
           });
 
     function handlerOnChange(e){
-        setUser(
+        setTravel(
             {
-            ...user,
+            ...travel,
             [e.target.id]: e.target.value
             }
         )
     }
 
-    function handlerSubmit(e){
+    async function handlerSubmit(e){
 
         e.preventDefault();
     
-        fetch('/travelRegistration',{
+        await fetch('/travelRegistration',{
             method:'POST',
-            body: JSON.stringify({user}),
+            body: JSON.stringify({travel}),
             headers: {
             'Content-Type': 'application/json',
-            // "accept": "application/json"
             }
         })
         .then(res=> res.json())
         .then(response=> {
-            alert('respuesta')
-            // history.push('/');
+            if (response) {
+              return  alert('viaje resgistrado con exito')
+            }
+           return alert('El viaje ya esta en nuetra base de datos')
         })
         }
-
 
 
     return (
@@ -110,7 +117,7 @@ function TravelRegister (){
                                 Nombre de trabajadores en el viaje:
                             </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="nombreTrabajadores" name="nombreTrabajadores" 
                                 placeholder="Juan, Pedro y Maria" type="text" onChange={handlerOnChange}/>
                         </div>
@@ -120,7 +127,7 @@ function TravelRegister (){
                                 Número de trabajadores en el viaje:
                             </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="numeroTrabajadores" name="numeroTrabajadores"
                                 placeholder="1" type="number" min="1" onChange={handlerOnChange}/>
                         </div>
@@ -130,7 +137,7 @@ function TravelRegister (){
                                 Fecha del viaje:
                             </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="fecha" name="fecha"
                                 placeholder="06/10/2020" type="date" onChange={handlerOnChange}/>
                         </div>
@@ -140,7 +147,7 @@ function TravelRegister (){
                                 Dirección del punto de partida:
                             </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="DireccionPartida" name="DireccionPartida"
                                 placeholder="Avenida Ricardo Lyon 1060" type="text" onChange={handlerOnChange}/>
                         </div>
@@ -150,7 +157,7 @@ function TravelRegister (){
                                 Dirección del punto de llegada:
                             </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="DireccionLlegada" name="DireccionLlegada"
                                 placeholder="La niña 2545, Los Condes" type="text" onChange={handlerOnChange}/>
                         </div>
@@ -158,19 +165,19 @@ function TravelRegister (){
                         <div style={styleLabel} htmlFor="medioTransporte">
                             <LabelTag>Medio de transporte:</LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <select id="medioTransporte" name="medioTransporte" 
                                 form="registro" style={styleSelect} onChange={handlerOnChange}>
                                 <option> Selecciona un medio </option>
-                                <option value={0.033}> Metro(Tren,Subway,Subterraneo) </option>
-                                <option value={0.21}>Auto(Gasolina)</option>
-                                <option value={0.249}>Camioneta(Diésel)</option>
-                                <option value={0.092}> Motocicleta(Gasolina)</option> 
-                                <option value={0.039}>Bus Transantiago(Transporte público)</option>
-                                <option value={0.012}>Bus(Vehículo privado)</option>
-                                <option value={0.279}>Avión (Chile) </option> 
-                                <option value={0.179}>Avión (Internacional)</option>
-                                <option value={0}>Caminando</option>
+                                <option value="Metro (Tren, Subway, Subterráneo)"> Metro(Tren,Subway,Subterraneo) </option>
+                                <option value="Auto (Gasolina)">Auto(Gasolina)</option>
+                                <option value="Camioneta (Diésel)">Camioneta(Diésel)</option>
+                                <option value="Motocicleta (Gasolina)"> Motocicleta(Gasolina)</option> 
+                                <option value="Bus Transantiago (Transporte público)">Bus Transantiago(Transporte público)</option>
+                                <option value="Bus (Vehículo privado)">Bus(Vehículo privado)</option>
+                                <option value="Avión (Chile)">Avión (Chile) </option> 
+                                <option value="Avión (Internacional)">Avión (Internacional)</option>
+                                <option value="Caminando">Caminando</option>
                             </select>
                         </div>
  
@@ -179,7 +186,7 @@ function TravelRegister (){
                             Cantidad de kilometros
                         </LabelTag>
                         </div>
-                        <div style={styleInput}>
+                        <div style={styleFlexCenter}>
                             <InputTag id="cantidadKilometros" name="cantidadKilometros"
                                 placeholder="1" type="number" min="1" onChange={handlerOnChange}/>
                         </div>
@@ -188,7 +195,7 @@ function TravelRegister (){
                                 De cual manera se realizo el viaje?
                             </LabelTag>
                         </div>
-                        <div style={styleInputRadio} onChange={e=> e.target.id === 'idaVuelta'?setUser({...user, idaVuelta: true}):setUser({...user, idaVuelta: false})}>
+                        <div style={styleInputRadio} onChange={e=> e.target.id === 'idaVuelta'?setTravel({...travel, idaVuelta: true}):setTravel({...travel, idaVuelta: false})}>
                             <InputTag id="ida" name="tipoViaje" 
                             type="radio"/>
                             <LabelTag  htmlFor="ida">
@@ -210,6 +217,17 @@ function TravelRegister (){
                     </div>
                 </Form>
             </section>
+            <section style={styleSection}>
+                <div style={styleConteiner}>   
+                    <div style={styleFlexCenter}>
+                        <Button path="/viewTravels">
+                            Registro de viajes
+                        </Button>
+                    </div>
+
+                </div>
+            </section>
+
         </main>
     )
 }

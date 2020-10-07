@@ -1,0 +1,26 @@
+{
+  "name": "emisionco2",
+  "version": "1.0.0",
+  "description": "client and server",
+  "scripts": {
+    "iclient": "cd client && npm install",
+    "iserver": "cd server && npm install",
+    "server": "cd server && npm run server",
+    "client": "cd client && npm run start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "test:client": "cd client && npm run test",
+    "test:server": "cd server && npm run test"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "wilberpulido"
+  },
+  "keywords": [
+    "emisionCO2"
+  ],
+  "author": "Wilber Pulido",
+  "license": "ISC"
+}

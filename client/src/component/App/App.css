@@ -1,0 +1,15 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  }
+
+body{
+  background-color: 	rgb(157, 198, 243);
+  display: flex;
+  justify-content: center;
+}
+
+main{
+ width: 900px;
+}

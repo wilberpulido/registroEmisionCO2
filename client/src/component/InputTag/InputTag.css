@@ -1,0 +1,23 @@
+.inputTag{
+    background-color: rgb(127,130,255);
+    border: none;
+    border-bottom: 2px solid blueviolet;
+    font-size: 1.3rem;
+  }
+  
+  .inputTag:focus{
+    outline: none;
+    border-bottom: 2px solid  blueviolet;
+    font-size: 1.3rem;
+  }
+  .inputTag::placeholder{
+      font-size: 1.2rem;
+      color: blueviolet;
+  }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+  -webkit-text-fill-color: black;
+  box-shadow: 0 0 0px 1000px rgb(127,130,255) inset;
+}

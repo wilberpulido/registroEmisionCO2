@@ -7,6 +7,8 @@ Para installar, es necesario abrir la consola y usar git clone https://github.co
 
 Una vez descargada la aplicacion desde github, por consola ingresar a la carpeta que se crea y correr los siguientes comandos.
 
+npm install
+
 npm run iclient
 
 y luego.
